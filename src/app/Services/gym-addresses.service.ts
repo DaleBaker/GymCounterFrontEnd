@@ -8,7 +8,7 @@ export class GymAddressesService {
   results: string[];
 
   constructor(private http: HttpClient) {
-    this.http.get('http://www.reddit.com/user/raumkraehe/comments.json').subscribe(data => {
+    this.http.get('https://www.reddit.com/user/raumkraehe/comments.json').subscribe(data => {
       // Read the result field from the JSON response.
       console.log(data);
       this.results = data['data']['children'];
