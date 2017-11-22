@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+import { GymAddressesService } from '../../services/gym-addresses.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent implements OnInit {
     Validators.required,
     Validators.pattern(EMAIL_REGEX)]);
 
-  constructor() { }
+  constructor(private gymAddressesService: GymAddressesService) {
+    this.gymAddressesService.listGyms();
+  }
 
   ngOnInit() {
   }
