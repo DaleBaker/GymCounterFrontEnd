@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable()
 export class GymAddressesService {
@@ -16,13 +16,14 @@ export class GymAddressesService {
 
     });
 
-    this.http.get('https://gym-counter-server.herokuapp.com/gyms.json').subscribe(data => {
-      // Read the result field from the JSON response.
-      console.log(data);
-      this.results = data['data']['children'];
-      console.log(this.results);
+    const body = {name: 'Anytime Fitness',
+      address: '240 Colombo St, Christchurch',
+      population: 0 };
 
-    });
+
+    http.post('https://gymcounter-api.herokuapp.com/gyms', body, {
+      })
+      .subscribe();
   }
 
   listGyms() {
