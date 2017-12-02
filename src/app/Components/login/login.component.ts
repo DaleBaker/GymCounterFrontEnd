@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 import { GymAddressesService } from '../../services/gym-addresses.service';
+import { Gym } from '../../../assets/Gym';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +9,29 @@ import { GymAddressesService } from '../../services/gym-addresses.service';
 })
 export class LoginComponent implements OnInit {
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(EMAIL_REGEX)]);
+  searchString: string;
+  listOfGyms: Gym[];
 
   constructor(private gymAddressesService: GymAddressesService) {
-    this.gymAddressesService.listGyms();
   }
 
   ngOnInit() {
+    this.gymAddressesService.listOfGyms.subscribe(listOfGyms => this.listOfGyms = listOfGyms);
+
+  }
+
+  findGym() {
+    console.log(this.searchString);
+    for (let i = 0; i < this.listOfGyms.length; i++) {
+      if (this.listOfGyms[i].address.toLowerCase() === this.searchString.toLowerCase()) {
+        this.gymAddressesService.setActiveGym(this.listOfGyms[i]);
+      }
+    }
+  }
+
+  addressesSimilar(a: string, b: string): boolean {
+
+    return false;
   }
 
 }

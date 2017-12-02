@@ -2,12 +2,9 @@
 
 <form class="example-form">
   <mat-form-field>
-    <input matInput placeholder="Gym Location" [formControl]="emailFormControl">
-    <mat-error *ngIf="emailFormControl.hasError('pattern')">
-      Please enter a supported gym location
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Selecting a specific gym is <strong>required</strong>
-    </mat-error>
+    <input matInput placeholder="Gym Location" [(ngModel)]=this.searchString name="yes">
   </mat-form-field>
+  <div id="small_margin_left">
+    <button mat-raised-button (click)="findGym()" >Go</button>
+  </div>
 </form>

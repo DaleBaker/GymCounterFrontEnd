@@ -1,33 +1,41 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {Gym} from '../../assets/gym';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class GymAddressesService {
 
-  listOfGyms = new Array();
-  results: string[];
+  private _listOfGyms: Gym[] = new Array();
+  private results: any;
+  private activeGymObject = new BehaviorSubject<Gym>(new Gym('', '', 0));
+  private listOfGymsArray = new BehaviorSubject<Gym[]>(new Array());
+
+  activeGym = this.activeGymObject.asObservable();
+  listOfGyms = this.listOfGymsArray.asObservable();
 
   constructor(private http: HttpClient) {
-    this.http.get('https://www.reddit.com/user/raumkraehe/comments.json').subscribe(data => {
-      // Read the result field from the JSON response.
-      console.log(data);
-      this.results = data['data']['children'];
-      console.log(this.results);
+    this.http.get('https://gymcounter-api.herokuapp.com/gyms.json').subscribe(data => {
+      this.results = data;
 
+      for (let i = 0; i < this.results.length ; i++) {
+        this._listOfGyms.push(new Gym(this.results[i].name, this.results[i].address, this.results[i].population));
+      }
+      this.listOfGymsArray.next(this._listOfGyms);
     });
+  }
 
+  setActiveGym(message: Gym) {
+    this.activeGymObject.next(message);
+  }
+
+  createGym() {
     const body = {name: 'Anytime Fitness',
       address: '240 Colombo St, Christchurch',
       population: 0 };
-
-
-    http.post('https://gymcounter-api.herokuapp.com/gyms', body, {
-      })
+    this.http.post('https://gymcounter-api.herokuapp.com/gyms', body, {
+    })
       .subscribe();
-  }
-
-  listGyms() {
-    console.log(this.listOfGyms);
   }
 
 
