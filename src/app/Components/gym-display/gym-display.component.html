@@ -1,10 +1,10 @@
-<mat-tab-group>
-  <mat-tab label="Tab 1">
-    <p>Current number of people in the gym: {{this.activeGym.population}}</p>
+<mat-tab-group style="margin: auto; text-align: center;" class="maxAndCenter">
+  <mat-tab label="Number Of People Today" class="maxAndCenter">
+    <h1>Current number of people in the gym: {{this.activeGym.population}}</h1>
     <app-day-view></app-day-view>
   </mat-tab>
-  <mat-tab label="Tab 2">
-    <p>Current number of people in the gym: {{this.activeGym.population}}</p>
+  <mat-tab label="Number Of People This Week" style="text-align: center;">
+    <h1>Current number of people in the gym: {{this.activeGym.population}}</h1>
     <app-week-view></app-week-view>
   </mat-tab>
 </mat-tab-group>
