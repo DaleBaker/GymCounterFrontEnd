@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GymAddressesService } from '../../services/gym-addresses.service';
 import { Gym } from '../../../assets/Gym';
-declare var google:any;
+declare var google: any;
 
 @Component({
   selector: 'app-gym-display',
@@ -31,7 +31,7 @@ export class GymDisplayComponent implements OnInit {
 
     const options = {
       title: 'Today\'s gym population',
-      chartArea: {width: '90%' }, // , height: '90%'},
+      chartArea: {width: '90%' , height: '90%'},
       hAxis: {
         title: 'Time',
         minValue: 0

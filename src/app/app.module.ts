@@ -9,13 +9,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './Components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GymDisplayComponent } from './Components/gym-display/gym-display.component';
+import { DayViewComponent } from './Components/gym-display/day-view/day-view.component';
+import { WeekViewComponent } from './Components/gym-display/week-view/week-view.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    GymDisplayComponent
+    GymDisplayComponent,
+    DayViewComponent,
+    WeekViewComponent
   ],
   imports: [
     BrowserModule,
