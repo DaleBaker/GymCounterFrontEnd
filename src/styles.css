@@ -8,13 +8,6 @@ html, body {
 }
 
 body {
-  background-image: url("assets/gym_image_purple.png");
-  background-repeat:no-repeat;
-  background-size:cover;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
 
 }

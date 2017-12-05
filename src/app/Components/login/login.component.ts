@@ -21,10 +21,13 @@ export class LoginComponent implements OnInit {
   }
 
   findGym() {
-    console.log(this.searchString);
+    let gymFound = false;
+
     for (let i = 0; i < this.listOfGyms.length; i++) {
       if (this.listOfGyms[i].address.toLowerCase() === this.searchString.toLowerCase()) {
         this.gymAddressesService.setActiveGym(this.listOfGyms[i]);
+        gymFound = true;
+        this.gymAddressesService.setGymSelected(gymFound);
       }
     }
   }

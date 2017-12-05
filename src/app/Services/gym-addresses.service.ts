@@ -10,9 +10,11 @@ export class GymAddressesService {
   private results: any;
   private activeGymObject = new BehaviorSubject<Gym>(new Gym('', '', 0));
   private listOfGymsArray = new BehaviorSubject<Gym[]>(new Array());
+  private gymHasBeenSelected = new BehaviorSubject<boolean>(false);
 
   activeGym = this.activeGymObject.asObservable();
   listOfGyms = this.listOfGymsArray.asObservable();
+  gymSelected = this.gymHasBeenSelected.asObservable();
 
   constructor(private http: HttpClient) {
     this.http.get('https://gymcounter-api.herokuapp.com/gyms.json').subscribe(data => {
@@ -27,6 +29,10 @@ export class GymAddressesService {
 
   setActiveGym(message: Gym) {
     this.activeGymObject.next(message);
+  }
+
+  setGymSelected(message: boolean) {
+    this.gymHasBeenSelected.next(message);
   }
 
   createGym() {

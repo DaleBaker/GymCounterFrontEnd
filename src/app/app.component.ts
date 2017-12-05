@@ -8,8 +8,9 @@ import { GymAddressesService } from './services/gym-addresses.service';
   providers: [GymAddressesService]
 })
 export class AppComponent {
-  title = 'app';
+  gymSelected = false;
 
   constructor(private gymAddressesService: GymAddressesService) {
-    }
+    this.gymAddressesService.gymSelected.subscribe(gymSelected => this.gymSelected = gymSelected);
   }
+}

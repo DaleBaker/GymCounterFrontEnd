@@ -1,5 +1,18 @@
-<mat-card>
-  <mat-card-content>
-    <app-login></app-login>
-  </mat-card-content>
-</mat-card>
+<div id="card" *ngIf="this.gymSelected == false; else other_content">
+  <mat-card>
+    <mat-card-content>
+      <app-login></app-login>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<ng-template #other_content>
+  <div>
+    <mat-card>
+      <mat-card-content>
+        <app-gym-display></app-gym-display>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>
