@@ -1,13 +1,19 @@
 export class Gym {
+  id: number;
   name: string;
   address: string;
-  population: number;
+  population: string[];
 
-  constructor(name: string, address: string, population: number) {
+  constructor(id: number, name: string, address: string, population: string[]) {
+    this.id = id;
     this.name = name;
     this.address = address;
     this.population = population;
 
+  }
+
+  getId(): number {
+    return this.id;
   }
 
   getAddress(): string {
@@ -18,7 +24,7 @@ export class Gym {
     return this.name;
   }
 
-  getPopulation(): number {
+  getPopulation(): string[] {
     return this.population;
   }
 
