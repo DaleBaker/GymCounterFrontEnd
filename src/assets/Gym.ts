@@ -16,6 +16,10 @@ export class Gym {
 
   }
 
+  setPopulation(input: string[]) {
+    this.population = input;
+  }
+
   getId(): number {
     return this.id;
   }
