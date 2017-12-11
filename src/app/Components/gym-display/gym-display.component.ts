@@ -32,12 +32,13 @@ export class GymDisplayComponent implements OnInit {
 
     const options = {
       title: 'Number Of People In The Gym',
-      chartArea: {width: '70%' , height: '90%'},
+      chartArea: {width: '70%' , height: '70%'},
       hAxis: {
         title: 'Time'
       },
       vAxis: {
-        title: 'Number Of People'
+        title: 'Number Of People',
+
       }
     };
 
