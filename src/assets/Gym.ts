@@ -1,10 +1,12 @@
 export class Gym {
+
   private id: number;
   private name: string;
   private address: string;
   private city: string;
   private country: string;
   private populationData = new Array();
+  private _currentNumberOfPeople = 0;
 
 
   constructor(id: number, name: string, address: string, city: string, country: string) {
@@ -27,11 +29,13 @@ export class Gym {
       newTimeStamp.push(parseInt(info[6], 10));
       this.populationData.push(newTimeStamp);
     }
+    this._currentNumberOfPeople = this.populationData[this.populationData.length - 1][1];
   }
 
   setPopulation(input: string[]) {
     this.parsePopulationArray(input);
   }
+
 
   getPopulationData(): Array<(Date|number)[]> {
     return this.populationData; // .slice(0, 1000);
@@ -43,6 +47,10 @@ export class Gym {
 
   getAddress(): string {
     return this.address;
+  }
+
+  get currentNumberOfPeople(): number {
+    return this._currentNumberOfPeople;
   }
 
 }
