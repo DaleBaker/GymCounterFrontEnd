@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GymAddressesService } from './services/gym-addresses.service';
+import {Gym} from "../assets/Gym";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,10 @@ import { GymAddressesService } from './services/gym-addresses.service';
   providers: [GymAddressesService]
 })
 export class AppComponent {
-  gymSelected = false;
+  activeGym: Gym;
 
   constructor(private gymAddressesService: GymAddressesService) {
-    this.gymAddressesService.gymSelected.subscribe(gymSelected => this.gymSelected = gymSelected);
+    this.gymAddressesService.activeGym.subscribe(activeGym => this.activeGym = activeGym);
+
   }
 }

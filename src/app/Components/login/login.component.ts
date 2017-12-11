@@ -21,20 +21,12 @@ export class LoginComponent implements OnInit {
   }
 
   findGym() {
-    let gymFound = false;
-
     for (let i = 0; i < this.listOfGyms.length; i++) {
-      if (this.listOfGyms[i].address.toLowerCase() === this.searchString.toLowerCase()) {
+      if (this.listOfGyms[i].getAddress().toLowerCase() === this.searchString.toLowerCase()) {
+        this.gymAddressesService.getPopulationForGym(this.listOfGyms[i]);
         this.gymAddressesService.setActiveGym(this.listOfGyms[i]);
-        gymFound = true;
-        this.gymAddressesService.setGymSelected(gymFound);
       }
     }
-  }
-
-  addressesSimilar(a: string, b: string): boolean {
-
-    return false;
   }
 
 }

@@ -1,0 +1,39 @@
+
+    // this.createGym('Snap Fitness', '205 Madras St');
+    // this.createGym('Anytime Fitness', '240 Colombo St');
+    // this.createGym('Anytime Fitness', '55 Riccarton Rd');
+    // this.createGym('Snap Fitness', '5 Newnham Terrace');
+    // this.createPopulation();
+
+
+  createGym(name: string, address: string) {
+    const body = {
+      name: name,
+      address: address,
+      city: 'Christchurch',
+      country: 'New Zealand',
+
+    };
+    this.http.post('https://gymcounter-api.herokuapp.com/gyms', body, {observe: 'response'})
+      .subscribe(resp => {
+        console.log(resp);
+
+      });
+  }
+
+  createPopulation() {
+    const body = {
+      population: {
+        population: MockData.getMockPopulationData2(),
+        gym_id: 3,
+      }
+
+    };
+    this.http.post('https://gymcounter-api.herokuapp.com/populations', body, {observe: 'response'})
+      .subscribe(resp => {
+        // Here, resp is of type HttpResponse<MyJsonData>.
+        // You can inspect its headers:
+        console.log(resp);
+
+      });
+  }

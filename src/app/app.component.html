@@ -1,4 +1,4 @@
-<div id="card" *ngIf="this.gymSelected == false; else other_content">
+<div id="card" *ngIf="(this.activeGym.getAddress() === ''); else other_content">
   <mat-card>
     <mat-card-content>
       <app-login></app-login>

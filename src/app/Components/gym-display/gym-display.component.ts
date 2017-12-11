@@ -18,8 +18,35 @@ export class GymDisplayComponent implements OnInit {
   ngOnInit() {
     this.gymAddressesService.activeGym.subscribe(activeGym => this.activeGym = activeGym);
     google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(this.drawDayGraphWithPredictive);
+    google.charts.setOnLoadCallback(this.drawDayGraphWithPredictive); // you cant have the parenthesis here
+    // google.charts.setOnLoadCallback(this.drawDayGraphWithoutPredictive); // you cant have the parenthesis here
 
+  }
+
+  drawDayGraphWithoutPredictive() {
+    const data = new google.visualization.DataTable();
+    data.addColumn('datetime', 'X');
+    data.addColumn('number', 'Actual Number Of People');
+
+    const populationTimestamps = this.activeGym.getPopulationData();
+
+    // ['Time', 'Predicted Number Of People', 'Actual Number Of People'],
+
+    data.addRows(populationTimestamps);
+
+    const options = {
+      title: 'Today\'s gym population',
+      chartArea: {width: '70%' , height: '90%'},
+      hAxis: {
+        title: 'Time'
+      },
+      vAxis: {
+        title: 'Number Of People'
+      }
+    };
+
+    const chart = new google.visualization.LineChart(document.getElementById('day_populations_chart'));
+    chart.draw(data, options);
   }
 
   drawDayGraphWithPredictive() {

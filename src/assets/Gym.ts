@@ -1,10 +1,10 @@
 export class Gym {
-  id: number;
-  name: string;
-  address: string;
-  city: string;
-  country: string;
-  population: string[];
+  private id: number;
+  private name: string;
+  private address: string;
+  private city: string;
+  private country: string;
+  private populationData = new Array();
 
 
   constructor(id: number, name: string, address: string, city: string, country: string) {
@@ -16,8 +16,25 @@ export class Gym {
 
   }
 
+  parsePopulationArray(rawArray: string[]) {
+    rawArray[0] = '0' + rawArray[0];
+    for (let i = 0; i < rawArray.length; i++) { // "0/0/7/1/1/2017/20"
+      const info = rawArray[0].split('/');
+      const date = new Date(parseInt(info[5], 10), parseInt(info[4], 10), parseInt(info[3], 10),
+                            parseInt(info[2], 10), parseInt(info[1], 10), parseInt(info[0], 10));
+      const newTimeStamp = new Array();
+      newTimeStamp.push(date);
+      newTimeStamp.push(parseInt(info[6], 10));
+      this.populationData.push(newTimeStamp);
+    }
+  }
+
   setPopulation(input: string[]) {
-    this.population = input;
+    this.parsePopulationArray(input);
+  }
+
+  getPopulationData(): Array<(Date|number)[]> {
+    return this.populationData;
   }
 
   getId(): number {
@@ -26,14 +43,6 @@ export class Gym {
 
   getAddress(): string {
     return this.address;
-  }
-
-  getName(): string {
-    return this.name;
-  }
-
-  getPopulation(): string[] {
-    return this.population;
   }
 
 }
