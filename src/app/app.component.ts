@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GymAddressesService } from './services/gym-addresses.service';
-import {Gym} from "../assets/Gym";
+import {Gym} from '../assets/Gym';
 
 @Component({
   selector: 'app-root',

@@ -38,6 +38,7 @@ export class GymAddressesService {
     const request_url = 'https://gymcounter-api.herokuapp.com/populations/' + gym_id.toString() + '.json';
       this.http.get(request_url).subscribe(data => {
         specificGym.setPopulation(data['population']);
+        this.setActiveGym(specificGym);
       });
 
   }

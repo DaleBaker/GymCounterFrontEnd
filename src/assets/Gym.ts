@@ -19,7 +19,7 @@ export class Gym {
   parsePopulationArray(rawArray: string[]) {
     rawArray[0] = '0' + rawArray[0];
     for (let i = 0; i < rawArray.length; i++) { // "0/0/7/1/1/2017/20"
-      const info = rawArray[0].split('/');
+      const info = rawArray[i].split('/');
       const date = new Date(parseInt(info[5], 10), parseInt(info[4], 10), parseInt(info[3], 10),
                             parseInt(info[2], 10), parseInt(info[1], 10), parseInt(info[0], 10));
       const newTimeStamp = new Array();
@@ -34,7 +34,7 @@ export class Gym {
   }
 
   getPopulationData(): Array<(Date|number)[]> {
-    return this.populationData;
+    return this.populationData; // .slice(0, 1000);
   }
 
   getId(): number {

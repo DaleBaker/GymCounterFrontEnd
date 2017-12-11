@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     for (let i = 0; i < this.listOfGyms.length; i++) {
       if (this.listOfGyms[i].getAddress().toLowerCase() === this.searchString.toLowerCase()) {
         this.gymAddressesService.getPopulationForGym(this.listOfGyms[i]);
-        this.gymAddressesService.setActiveGym(this.listOfGyms[i]);
       }
     }
   }
