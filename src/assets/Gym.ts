@@ -1,7 +1,10 @@
 export class Gym {
+  get name(): string { return this._name; }
+  get currentNumberOfPeople(): number { return this._currentNumberOfPeople; }
+  get lastUpdated(): Date { return this._lastUpdated; }
 
   private id: number;
-  private name: string;
+  private _name: string;
   private address: string;
   private city: string;
   private country: string;
@@ -11,7 +14,7 @@ export class Gym {
 
   constructor(id: number, name: string, address: string, city: string, country: string) {
     this.id = id;
-    this.name = name;
+    this._name = name;
     this.address = address;
     this.city = city;
     this.country = country;
@@ -47,14 +50,6 @@ export class Gym {
 
   getAddress(): string {
     return this.address;
-  }
-
-  get currentNumberOfPeople(): number {
-    return this._currentNumberOfPeople;
-  }
-
-  get lastUpdated(): Date {
-    return this._lastUpdated;
   }
 
 }
