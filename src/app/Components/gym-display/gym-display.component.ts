@@ -31,7 +31,6 @@ export class GymDisplayComponent implements OnInit {
     data.addRows(activeGym.getPopulationData());
 
     const options = {
-      title: 'Number Of People In The Gym',
       chartArea: {width: '70%' , height: '70%'},
       hAxis: {
         title: 'Time'

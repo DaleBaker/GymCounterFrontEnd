@@ -7,7 +7,7 @@ export class Gym {
   private country: string;
   private populationData = new Array();
   private _currentNumberOfPeople = 0;
-
+  private _lastUpdated: Date;
 
   constructor(id: number, name: string, address: string, city: string, country: string) {
     this.id = id;
@@ -30,12 +30,12 @@ export class Gym {
       this.populationData.push(newTimeStamp);
     }
     this._currentNumberOfPeople = this.populationData[this.populationData.length - 1][1];
+    this._lastUpdated = this.populationData[this.populationData.length - 1][0];
   }
 
   setPopulation(input: string[]) {
     this.parsePopulationArray(input);
   }
-
 
   getPopulationData(): Array<(Date|number)[]> {
     return this.populationData; // .slice(0, 1000);
@@ -51,6 +51,10 @@ export class Gym {
 
   get currentNumberOfPeople(): number {
     return this._currentNumberOfPeople;
+  }
+
+  get lastUpdated(): Date {
+    return this._lastUpdated;
   }
 
 }
