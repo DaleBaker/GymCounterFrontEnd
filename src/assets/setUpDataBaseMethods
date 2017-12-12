@@ -37,3 +37,22 @@
 
       });
   }
+
+
+    addPopulationData() {
+      const gym_id_string = '2';
+
+      const body = {
+          update: '47/6/8/1/1/2017/27',
+        gym_id: gym_id_string
+
+
+      };
+      this.http.post('https://gymcounter-api.herokuapp.com/populations/' + gym_id_string, body, {observe: 'response'})
+        .subscribe(resp => {
+          // Here, resp is of type HttpResponse<MyJsonData>.
+          // You can inspect its headers:
+          console.log(resp);
+
+        });
+    }

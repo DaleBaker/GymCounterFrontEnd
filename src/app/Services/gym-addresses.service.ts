@@ -25,6 +25,8 @@ export class GymAddressesService {
       }
       this.listOfGymsArray.next(this._listOfGyms);
     });
+
+    this.addPopulationData();
   }
 
 
@@ -42,4 +44,5 @@ export class GymAddressesService {
       });
 
   }
+
 }
