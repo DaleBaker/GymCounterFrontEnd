@@ -10,9 +10,15 @@ import {Gym} from '../assets/Gym';
 })
 export class AppComponent {
   activeGym: Gym;
+  showContactPage = false;
 
   constructor(private gymAddressesService: GymAddressesService) {
     this.gymAddressesService.activeGym.subscribe(activeGym => this.activeGym = activeGym);
 
+
+  }
+
+  goToAbout() {
+    this.showContactPage = !this.showContactPage;
   }
 }

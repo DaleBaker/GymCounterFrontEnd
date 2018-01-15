@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GymDisplayComponent } from './Components/gym-display/gym-display.component';
 import { DayViewComponent } from './Components/gym-display/day-view/day-view.component';
 import { WeekViewComponent } from './Components/gym-display/week-view/week-view.component';
+import { ContactComponent } from './Components/contact/contact.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { WeekViewComponent } from './Components/gym-display/week-view/week-view.
     LoginComponent,
     GymDisplayComponent,
     DayViewComponent,
-    WeekViewComponent
+    WeekViewComponent,
+    ContactComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,29 @@
-<div id="card" *ngIf="(this.activeGym.getAddress() === ''); else other_content">
-  <mat-card>
-    <mat-card-content>
-      <app-login></app-login>
-    </mat-card-content>
-  </mat-card>
+<div *ngIf="(this.showContactPage ); else main_content">
+  <app-contact></app-contact>
 </div>
-
-
-<ng-template #other_content>
-  <div class="maxAndCenter">
-    <mat-card class="maxAndCenter">
-      <mat-card-content class="maxAndCenter">
-        <app-gym-display class="maxAndCenter"></app-gym-display>
-      </mat-card-content>
-    </mat-card>
+<ng-template #main_content>
+  <div id="card" *ngIf="(this.activeGym.getAddress() === ''); else other_content">
+    <div>
+      <mat-card>
+        <mat-card-content>
+          <app-login></app-login>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <br>
+      <div class="about_container">
+        <a (click)="goToAbout()"> contact </a>
+      </div>
+    </div>
   </div>
+  <ng-template #other_content>
+    <div class="maxAndCenter">
+      <mat-card class="maxAndCenter">
+        <mat-card-content class="maxAndCenter">
+          <app-gym-display class="maxAndCenter"></app-gym-display>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
 </ng-template>
+

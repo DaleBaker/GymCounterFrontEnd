@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gym } from '../../assets/gym';
-import { MockData } from '../../assets/mockData';
 
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
@@ -17,6 +16,16 @@ export class GymAddressesService {
   listOfGyms = this.listOfGymsArray.asObservable();
 
   constructor(private http: HttpClient) {
+    this.getListOfGyms();
+
+  }
+
+
+  setActiveGym(message: Gym) {
+    this.activeGymObject.next(message);
+  }
+
+  getListOfGyms() {
     this.http.get('https://gymcounter-api.herokuapp.com/gyms.json').subscribe(data => {
       this.results = data;
 
@@ -25,13 +34,6 @@ export class GymAddressesService {
       }
       this.listOfGymsArray.next(this._listOfGyms);
     });
-
-    this.addPopulationData();
-  }
-
-
-  setActiveGym(message: Gym) {
-    this.activeGymObject.next(message);
   }
 
 
