@@ -3,14 +3,15 @@
 </div>
 <ng-template #main_content>
   <div id="card" *ngIf="(this.activeGym.getAddress() === ''); else other_content">
-    <div>
+    <div style ="position:absolute;">
       <mat-card>
         <mat-card-content>
           <app-login></app-login>
         </mat-card-content>
       </mat-card>
-      <br>
-      <br>
+    </div>
+    <br>
+    <div class="about_container_container">
       <div class="about_container">
         <a (click)="toggleAbout()"> contact </a>
       </div>
