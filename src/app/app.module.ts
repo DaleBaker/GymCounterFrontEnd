@@ -12,7 +12,6 @@ import { GymDisplayComponent } from './Components/gym-display/gym-display.compon
 import { DayViewComponent } from './Components/gym-display/day-view/day-view.component';
 import { WeekViewComponent } from './Components/gym-display/week-view/week-view.component';
 import { ContactComponent } from './Components/contact/contact.component';
-import { FooterComponent } from './Components/footer/footer.component';
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import { FooterComponent } from './Components/footer/footer.component';
     GymDisplayComponent,
     DayViewComponent,
     WeekViewComponent,
-    ContactComponent,
-    FooterComponent
+    ContactComponent
   ],
   imports: [
     BrowserModule,
