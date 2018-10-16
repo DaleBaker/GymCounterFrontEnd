@@ -18,7 +18,7 @@ export class AppComponent {
 
   }
 
-  goToAbout() {
+  toggleAbout() {
     this.showContactPage = !this.showContactPage;
   }
 }

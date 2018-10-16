@@ -1,5 +1,5 @@
 <div *ngIf="(this.showContactPage ); else main_content">
-  <app-contact></app-contact>
+  <app-contact (toggleAbout)="toggleAbout()"></app-contact>
 </div>
 <ng-template #main_content>
   <div id="card" *ngIf="(this.activeGym.getAddress() === ''); else other_content">
@@ -12,7 +12,7 @@
       <br>
       <br>
       <div class="about_container">
-        <a (click)="goToAbout()"> contact </a>
+        <a (click)="toggleAbout()"> contact </a>
       </div>
     </div>
   </div>

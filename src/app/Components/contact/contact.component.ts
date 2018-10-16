@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-contact',
@@ -9,7 +9,14 @@ export class ContactComponent implements OnInit {
 
   constructor() { }
 
+  @Output() toggleAbout = new EventEmitter<string>();
+
+  callParent() {
+    this.toggleAbout.next();
+  }
+
   ngOnInit() {
+
   }
 
 }
