@@ -40,7 +40,8 @@ export class GymAddressesService {
   getPopulationForGym(specificGym: Gym) {
     const gym_id = specificGym.getId();
     const request_url = 'https://gymcounter-api.herokuapp.com/populations/' + gym_id.toString() + '.json';
-      this.http.get(request_url).subscribe(data => {
+    console.log(request_url);
+    this.http.get(request_url).subscribe(data => {
         specificGym.setPopulation(data['population']);
         this.setActiveGym(specificGym);
       });
