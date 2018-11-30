@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WeekViewComponent } from './week-view.component';
+import { MultiCameraViewComponent } from './multi-camera-view.component';
 
-describe('WeekViewComponent', () => {
-  let component: WeekViewComponent;
-  let fixture: ComponentFixture<WeekViewComponent>;
+describe('MultiCameraViewComponent', () => {
+  let component: MultiCameraViewComponent;
+  let fixture: ComponentFixture<MultiCameraViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeekViewComponent ]
+      declarations: [ MultiCameraViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeekViewComponent);
+    fixture = TestBed.createComponent(MultiCameraViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

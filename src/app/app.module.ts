@@ -9,9 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './Components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GymDisplayComponent } from './Components/gym-display/gym-display.component';
-import { DayViewComponent } from './Components/gym-display/day-view/day-view.component';
-import { WeekViewComponent } from './Components/gym-display/week-view/week-view.component';
 import { ContactComponent } from './Components/contact/contact.component';
+import { SingleCameraViewComponent } from './Components/single-camera-view/single-camera-view.component';
+import { MultiCameraViewComponent } from './Components/multi-camera-view/multi-camera-view.component';
 
 
 @NgModule({
@@ -19,9 +19,9 @@ import { ContactComponent } from './Components/contact/contact.component';
     AppComponent,
     LoginComponent,
     GymDisplayComponent,
-    DayViewComponent,
-    WeekViewComponent,
-    ContactComponent
+    ContactComponent,
+    SingleCameraViewComponent,
+    MultiCameraViewComponent
   ],
   imports: [
     BrowserModule,

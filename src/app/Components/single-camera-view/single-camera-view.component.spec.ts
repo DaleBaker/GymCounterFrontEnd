@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DayViewComponent } from './day-view.component';
+import { SingleCameraViewComponent } from './single-camera-view.component';
 
-describe('DayViewComponent', () => {
-  let component: DayViewComponent;
-  let fixture: ComponentFixture<DayViewComponent>;
+describe('SingleCameraViewComponent', () => {
+  let component: SingleCameraViewComponent;
+  let fixture: ComponentFixture<SingleCameraViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DayViewComponent ]
+      declarations: [ SingleCameraViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DayViewComponent);
+    fixture = TestBed.createComponent(SingleCameraViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
