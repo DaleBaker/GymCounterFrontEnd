@@ -18,6 +18,14 @@ export class Camera {
   	this.populationData = data;
   }
 
+  getPopulationData() {
+
+    var camera_id = this.id.toString();
+    let object = {};
+    object[camera_id] = this.populationData;
+    return object;
+  }
+
   getCameraID() : Number {
   	return this.id;
   }

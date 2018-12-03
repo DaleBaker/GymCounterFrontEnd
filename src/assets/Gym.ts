@@ -22,7 +22,6 @@ export class Gym {
     this.city = city;
     this.country = country;
     let camerasArray = [];
-    console.log(cameras);
     for (let i = 0; i < cameras.length; i++) {
       if (cameras[i] !== null) {
         camerasArray.push(new Camera(cameras[i]['camera_id'], cameras[i]['name'], cameras[i]['currentpopulation'], cameras[i]['gymid'],));
@@ -36,27 +35,17 @@ export class Gym {
     return this.cameras;
   }
 
-  parsePopulationArray(rawArray: string[]) {
-    rawArray[0] = '0' + rawArray[0];
-    for (let i = 0; i < rawArray.length; i++) { // "0/0/7/1/1/2017/20"
-      const info = rawArray[i].split('/');
-      const date = new Date(parseInt(info[5], 10), parseInt(info[4], 10), parseInt(info[3], 10),
-                            parseInt(info[2], 10), parseInt(info[1], 10), parseInt(info[0], 10));
-      const newTimeStamp = new Array();
-      newTimeStamp.push(date);
-      newTimeStamp.push(parseInt(info[6], 10));
-      this.populationData.push(newTimeStamp);
+  getNumberOfCameras() : Number {
+    return this.cameras.length;
+  }
+
+
+  getPopulationData() {
+    let populationData = [];
+    for (let i = 0; i < this.cameras.length; i++) {
+      populationData.push(this.cameras[i].getPopulationData());
     }
-    this._currentNumberOfPeople = this.populationData[this.populationData.length - 1][1];
-    this._lastUpdated = this.populationData[this.populationData.length - 1][0];
-  }
-
-  setPopulation(input: string[]) {
-    this.parsePopulationArray(input);
-  }
-
-  getPopulationData(): Array<(Date|number)[]> {
-    return this.populationData; // .slice(0, 1000);
+    return populationData; 
   }
 
   getId(): number {
