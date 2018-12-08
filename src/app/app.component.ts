@@ -21,4 +21,8 @@ export class AppComponent {
   toggleAbout() {
     this.showContactPage = !this.showContactPage;
   }
+
+  logoutOfGym() {
+    this.gymAddressesService.setActiveGym(new Gym(-1, '', '', '', '', [null]));
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from './../../../assets/canvasjs.min';
-
-
+import { Gym } from '../../../assets/Gym';
+import { GymAddressesService } from '../../services/gym-addresses.service';
 
 @Component({
   selector: 'app-multi-camera-view',
@@ -10,32 +10,49 @@ import * as CanvasJS from './../../../assets/canvasjs.min';
 })
 export class MultiCameraViewComponent implements OnInit {
 
-  constructor() { }
+   activeGym: Gym;
+   numberOfPeople: Number;
+
+  constructor(private gymAddressesService: GymAddressesService) { }
 
   ngOnInit() {
-  	let chart = new CanvasJS.Chart("chartContainer", {
+  	this.gymAddressesService.activeGym.subscribe(activeGym => this.activeGym = activeGym);
+    let cameras = this.activeGym.getPopulationData();
+    let cameraProcessedData = [];
+    console.log(cameras);
+    for (let x = 0; x < cameras.length; x++) { 
+    	let cameraData = cameras[x][Number(this.activeGym.cameras[x].getCameraID())];
+    	cameraProcessedData.push([]);
+	    for (let i = 0; i < cameraData.length; i++) {
+	      cameraProcessedData[x].push({x: new Date(cameraData[i].time), y: cameraData[i].population});
+	      this.numberOfPeople = cameraData[i].population;
+	    }
+	    let chart = new CanvasJS.Chart("chartContainer" + x, {
 		animationEnabled: true,
-		title: {
-			text: "Basic Column Chart in Angular"
+		title:{
+			text: "Website Traffic"
+		},
+		axisX:{
+			valueFormatString: "DD MMM"
+		},
+		axisY: {
+			title: "Number of Visitors",
+			includeZero: false,
+			scaleBreaks: {
+				autoCalculate: true
+			}
 		},
 		data: [{
-			type: "column",
-			dataPoints: [
-				{ y: 71, label: "Apple" },
-				{ y: 55, label: "Mango" },
-				{ y: 50, label: "Orange" },
-				{ y: 65, label: "Banana" },
-				{ y: 95, label: "Pineapple" },
-				{ y: 68, label: "Pears" },
-				{ y: 28, label: "Grapes" },
-				{ y: 34, label: "Lychee" },
-				{ y: 14, label: "Jackfruit" }
-			]
+			type: "line",
+			xValueFormatString: "DDD HH:mm:ss",
+			color: "#F08080",
+			dataPoints: cameraProcessedData[x]
 		}]
 	});
 		
 	chart.render();
     }
+	}
   
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Gym } from '../../assets/gym';
+import { Gym } from '../../assets/Gym';
 import {Camera } from '../../assets/Camera';
 
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -15,8 +15,6 @@ export class GymAddressesService {
 
   activeGym = this.activeGymObject.asObservable();
   listOfGyms = this.listOfGymsArray.asObservable();
-
-  yeppers;
 
   constructor(private http: HttpClient) {
   }
@@ -44,8 +42,6 @@ export class GymAddressesService {
     console.log('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID);
         this.http.get('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID)
       .subscribe(resp => {
-        this.activeGymObject.subscribe(activeGym => this.yeppers = activeGym);
-        console.log(resp);
         let cameras = this.activeGymObject.value.getCameras();
         for (let i = 0; i < cameras.length; i++) {
           if (cameras[i].getCameraID() == cameraID) {

@@ -17,7 +17,12 @@ body {
 
   height: 100%;
   width: 100%;
-
+  padding:0;
+  border-width:0;
+  display:block;
+      -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;      
 }
 
 

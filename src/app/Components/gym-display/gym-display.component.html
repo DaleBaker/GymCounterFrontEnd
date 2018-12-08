@@ -1,6 +1,9 @@
-<div *ngIf="(this.activeGym.getNumberOfCameras() > 1); else single_camera_content" class="maxAndCenter">
-    <app-multi-camera-view class="maxAndCenter"></app-multi-camera-view>
+
+<div style="position: absolute; top: 50px; width: 90%;">
+	<div *ngIf="(this.activeGym.getNumberOfCameras() > 1); else single_camera_content" class="maxAndCenter">
+	    <app-multi-camera-view class="maxAndCenter"></app-multi-camera-view>
+	</div>
+	<ng-template #single_camera_content>
+	    <app-single-camera-view class="maxAndCenter"></app-single-camera-view>
+	</ng-template>
 </div>
-<ng-template #single_camera_content>
-    <app-single-camera-view class="maxAndCenter"></app-single-camera-view>
-</ng-template>
