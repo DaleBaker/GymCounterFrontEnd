@@ -23,8 +23,14 @@ export class GymAddressesService {
 
   setActiveGym(message: Gym) {
     this.activeGymObject.next(message);
-    for (let i = 0; i < message.cameras.length; i++) {
-      message.cameras[i].setPopulationData(this.getPopulationForCamera(message.cameras[i].getCameraID()));
+    if (message.cameras.length < 2) {
+      for (let i = 0; i < message.cameras.length; i++) {
+        message.cameras[i].setPopulationData(this.getPopulationForCamera(message.cameras[i].getCameraID()));
+      }
+    } else {
+      for (let i = 0; i < message.cameras.length; i++) {
+        message.cameras[i].setPopulationData(this.getDayForCamera(message.cameras[i].getCameraID()));
+      }
     }
   }
 
@@ -42,6 +48,17 @@ export class GymAddressesService {
   getPopulationForCamera(cameraID: Number) {
     let promise = new Promise((resolve, reject) => {
       this.http.get('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID)
+      .subscribe(resp => {
+        resolve(resp);
+      });
+    });
+    return promise;
+  }
+
+  getDayForCamera(cameraID: Number) {
+
+    let promise = new Promise((resolve, reject) => {
+      this.http.get('https://gym-backend.herokuapp.com/getTodayFromCamera/' + cameraID)
       .subscribe(resp => {
         resolve(resp);
       });
