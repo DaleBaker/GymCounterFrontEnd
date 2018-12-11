@@ -39,7 +39,6 @@ export class Gym {
     return this.cameras.length;
   }
 
-
   getPopulationData() {
     let populationData = [];
     for (let i = 0; i < this.cameras.length; i++) {

@@ -30,4 +30,8 @@ export class Camera {
   	return this.id;
   }
 
+  getCameraName() {
+    return this.name;
+  }
+
 }

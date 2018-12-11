@@ -16,6 +16,7 @@ export class GymAddressesService {
   activeGym = this.activeGymObject.asObservable();
   listOfGyms = this.listOfGymsArray.asObservable();
 
+
   constructor(private http: HttpClient) {
   }
 
@@ -23,7 +24,7 @@ export class GymAddressesService {
   setActiveGym(message: Gym) {
     this.activeGymObject.next(message);
     for (let i = 0; i < message.cameras.length; i++) {
-      this.getPopulationForCamera(message.cameras[i].getCameraID());
+      message.cameras[i].setPopulationData(this.getPopulationForCamera(message.cameras[i].getCameraID()));
     }
   }
 
@@ -39,18 +40,13 @@ export class GymAddressesService {
 
 
   getPopulationForCamera(cameraID: Number) {
-    console.log('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID);
-        this.http.get('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID)
+    let promise = new Promise((resolve, reject) => {
+      this.http.get('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID)
       .subscribe(resp => {
-        let cameras = this.activeGymObject.value.getCameras();
-        for (let i = 0; i < cameras.length; i++) {
-          if (cameras[i].getCameraID() == cameraID) {
-            cameras[i].setPopulationData(resp);
-          }
-        }
-
+        resolve(resp);
       });
-
+    });
+    return promise;
   }
 
 }

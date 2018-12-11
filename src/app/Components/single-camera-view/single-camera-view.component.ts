@@ -24,33 +24,46 @@ export class SingleCameraViewComponent implements OnInit {
   }
 
   drawDayGraphWithoutPredictive(activeGym: Gym) {
-    const data = new google.visualization.DataTable();
-    data.addColumn('datetime', 'Time');
-    data.addColumn('number', 'Number Of People');
-
-    let cameraData = activeGym.getPopulationData()[0][Number(activeGym.cameras[0].getCameraID())];
-    let cameraProcessedData = [];
-    for (let i = 0; i < cameraData.length; i++) {
-      cameraProcessedData.push([new Date(cameraData[i].time), cameraData[i].population]);
-      this.numberOfPeople = cameraData[i].population;
-    }
 
 
-    data.addRows(cameraProcessedData);
+    let thePromise = activeGym.getPopulationData()[0][Number(activeGym.cameras[0].getCameraID())];
 
-    const options = {
-      chartArea: {width: '70%' , height: '70%'},
-      hAxis: {
-        title: 'Time'
-      },
-      vAxis: {
-        title: 'Number Of People',
+    //thePromise.then(function(data, this) { return this.createChart(data, this); });
+    thePromise.then(this.createChart.bind(null, this));
 
+  }
+
+
+
+ createChart(componentReference, value) {
+      const data = new google.visualization.DataTable();
+
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'Number Of People');
+
+      let cameraData = value;
+      let cameraProcessedData = [];
+      for (let i = 0; i < cameraData.length; i++) {
+        cameraProcessedData.push([new Date(cameraData[i].time), cameraData[i].population]);
+        componentReference.numberOfPeople = cameraData[i].population;
       }
-    };
 
-    const chart = new google.visualization.LineChart(document.getElementById('day_populations_chart'));
-    chart.draw(data, options);
+
+      data.addRows(cameraProcessedData);
+
+      const options = {
+        chartArea: {width: '70%' , height: '70%'},
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Number Of People',
+
+        }
+      };
+
+      const chart = new google.visualization.LineChart(document.getElementById('day_populations_chart'));
+      chart.draw(data, options);
   }
 
   drawDayGraphWithPredictive() {

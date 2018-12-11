@@ -1,5 +1,6 @@
+<div ngFor *ngFor="let item of activeGym.getCameras(); let i = index" >
 
+	<h2>There are currently {{currentCameraPopulations[i]}} in {{cameraNames[i]}} </h2>
+  <div [attr.id]="'chartContainer' + i"></div>
 
-<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+</div>
