@@ -52,7 +52,6 @@ export class SingleCameraViewComponent implements OnInit {
       data.addRows(cameraProcessedData);
 
       const options = {
-        chartArea: {width: '70%' , height: '70%'},
         hAxis: {
           title: 'Time'
         },
