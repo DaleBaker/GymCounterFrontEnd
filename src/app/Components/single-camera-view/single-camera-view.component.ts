@@ -24,18 +24,12 @@ export class SingleCameraViewComponent implements OnInit {
   }
 
   drawDayGraphWithoutPredictive(activeGym: Gym) {
-
-
     let thePromise = activeGym.getPopulationData()[0][Number(activeGym.cameras[0].getCameraID())];
-
-    //thePromise.then(function(data, this) { return this.createChart(data, this); });
-    thePromise.then(this.createChart.bind(null, this));
+    thePromise.then(this.createChartWithoutPredictive.bind(null, this));
 
   }
 
-
-
- createChart(componentReference, value) {
+ createChartWithoutPredictive(componentReference, value) {
       const data = new google.visualization.DataTable();
 
       data.addColumn('datetime', 'Time');
@@ -65,30 +59,36 @@ export class SingleCameraViewComponent implements OnInit {
       chart.draw(data, options);
   }
 
-  drawDayGraphWithPredictive() {
+ createChartWithPredictive(componentReference, value) {
     const data = new google.visualization.DataTable();
-    data.addColumn('string', 'X');
+    data.addColumn('datetime', 'Time');
     data.addColumn('number', 'Predicted Number Of People');
     data.addColumn('number', 'Actual Number Of People');
 
-    // ['Time', 'Predicted Number Of People', 'Actual Number Of People'],
-
-    data.addRows([ ['9:00', 2, 2],
-        ['10:00', 25, 4], ['11:00', 7, 7], ['12:00', 6, 6], ['13:00', 4, null], ['14:00', 6, null]]);
-
-    const options = {
-      title: 'Today\'s gym population',
-      chartArea: {width: '70%' , height: '90%'},
-      hAxis: {
-        title: 'Time'
-      },
-      vAxis: {
-        title: 'Number Of People'
+      let cameraData = value;
+      let cameraProcessedData = [];
+      for (let i = 0; i < cameraData.length; i++) {
+         let predictedNumber = Number(cameraData[i].population) + Number(Math.round(Math.random() * 14) - 7);
+         if (predictedNumber < 0) {
+          predictedNumber = 0;
+         }
+        cameraProcessedData.push([new Date(cameraData[i].time), predictedNumber, cameraData[i].population]);
+        componentReference.numberOfPeople = cameraData[i].population;
       }
-    };
 
-    const chart = new google.visualization.LineChart(document.getElementById('day_populations_chart'));
-    chart.draw(data, options);
+      data.addRows(cameraProcessedData);
+      const options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Number Of People',
+
+        }
+      };
+
+      const chart = new google.visualization.LineChart(document.getElementById('day_populations_chart'));
+      chart.draw(data, options);
   }
 
 }

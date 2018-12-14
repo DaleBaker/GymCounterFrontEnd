@@ -27,16 +27,19 @@ export class MultiCameraViewComponent implements OnInit {
 }
 
   drawDayGraphWithoutPredictive(activeGym: Gym) {
-
-
     let cameras = this.activeGym.getPopulationData();
    	this.cameraPromises = [];
     for (let x = 0; x < cameras.length; x++) { 
     	let cameraPromise = cameras[x][Number(this.activeGym.cameras[x].getCameraID())];
     	this.cameraPromises.push(cameraPromise);
     	this.cameraNames.push(this.activeGym.cameras[x].getCameraName());
+      if (x == 2) {
+              cameraPromise.then(this.createChartWithPredictive.bind(null, this, x));
+
+      } else {
     	cameraPromise.then(this.createChart.bind(null, this, x));
-	}
+    }
+	  }
   }
 
  createChart(componentReference, cameraId, value) {
@@ -47,10 +50,86 @@ export class MultiCameraViewComponent implements OnInit {
 
       let cameraData = value;
       let cameraProcessedData = [];
+            let lastDate;
+
       for (let i = 0; i < cameraData.length; i++) {
         cameraProcessedData.push([new Date(cameraData[i].time), cameraData[i].population]);
         componentReference.currentCameraPopulations[cameraId] = cameraData[i].population;
+                lastDate = new Date(cameraData[i].time);
+
       }
+
+      data.addRows(cameraProcessedData);
+
+      const options = {
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Number Of People',
+
+        }, chartArea: {width: '70%'}
+
+      };
+
+      const chart = new google.visualization.LineChart(document.getElementById("chartContainer" + cameraId));
+      chart.draw(data, options);
+  }
+
+
+   createChartWithPredictive(componentReference, cameraId, value) {
+      const data = new google.visualization.DataTable();
+
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'Number Of People');
+      data.addColumn('number', 'Predicted Number Of People');
+
+      let cameraData = value;
+      let cameraProcessedData = [];
+      let lastDate;
+      for (let i = 0; i < cameraData.length; i++) {
+        let predictedNumber = Number(cameraData[i].population) + Number(Math.round(Math.random() * 8) - 4);
+        if (predictedNumber < 0) {
+          predictedNumber = 0;
+        }
+        cameraProcessedData.push([new Date(cameraData[i].time), cameraData[i].population, predictedNumber]);
+        lastDate = new Date(cameraData[i].time);
+        componentReference.currentCameraPopulations[cameraId] = cameraData[i].population;
+      }
+
+      let currentGymPopulation = componentReference.currentCameraPopulations[cameraId];
+
+      for (let i = 0; i < 12; i++) {
+        let predictedNumber = Number(cameraData[i].population) + Number(Math.round(Math.random() * 8) - 4);
+        var newDateObj = new Date();
+        newDateObj.setTime(lastDate.getTime() + (60 * 60 * 1000));
+        lastDate = newDateObj;        
+        var populationShift = Math.round(Math.random() * 20) - 10;
+        currentGymPopulation += populationShift;
+
+        //make sure population never drops below 0
+        if (currentGymPopulation < 0) {
+          currentGymPopulation = 0;
+        }
+
+        //make sure population doesnt get unrealistically high
+        if (currentGymPopulation > 60) {
+          currentGymPopulation -= 5;
+        }
+        var newDateObj2 = new Date();
+        newDateObj2.setTime(lastDate.getTime() + (720 * 60 * 1000));
+        var isoString = newDateObj2.toISOString().split("T");
+
+       console.log(isoString);
+
+       if (parseInt(isoString[1].substring(0, 2)) < 6 || parseInt(isoString[1].substring(0, 2)) > 22) {
+        currentGymPopulation = 0;
+      }
+
+        cameraProcessedData.push([lastDate, null, currentGymPopulation]);
+
+      }
+
 
 
       data.addRows(cameraProcessedData);
@@ -62,7 +141,7 @@ export class MultiCameraViewComponent implements OnInit {
         vAxis: {
           title: 'Number Of People',
 
-        }
+          }, chartArea: {width: '70%'}
       };
 
       const chart = new google.visualization.LineChart(document.getElementById("chartContainer" + cameraId));
@@ -70,41 +149,3 @@ export class MultiCameraViewComponent implements OnInit {
   }
 }
 
-/*
-	createChart(componentReference, cameraId, value) {
-
-		let cameraProcessedData = [];
-		for (let i = 0; i < value.length ; i ++) {
-
-
-	      cameraProcessedData.push({x: new Date(value[i].time), y: value[i].population});
-	      //this.numberOfPeople = cameraData[i].population;
-	  }
-	    
-	    let chart = new CanvasJS.Chart("chartContainer" + cameraId, {
-			animationEnabled: true,
-			title:{
-				text: "Website Traffic"
-			},
-			axisX:{
-				valueFormatString: "DD MMM"
-			},
-			axisY: {
-				title: "Number of Visitors",
-				includeZero: false,
-				scaleBreaks: {
-					autoCalculate: true
-				}
-			},
-			data: [{
-				type: "line",
-				xValueFormatString: "DDD HH:mm:ss",
-				color: "#F08080",
-				dataPoints: cameraProcessedData
-			}]
-		});
-			
-		chart.render();
-		
-	}
-}*/
