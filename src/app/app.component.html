@@ -4,9 +4,10 @@
 <ng-template #main_content>
   <div id="card" *ngIf="(this.activeGym.getAddress() === ''); else other_content">
     <div style ="position:absolute;">
-      <mat-card>
+      <mat-card class="noPadding">
         <mat-card-content>
           <app-login></app-login>
+          <p id="error_field">{{errorMessage}}</p>
         </mat-card-content>
       </mat-card>
     </div>

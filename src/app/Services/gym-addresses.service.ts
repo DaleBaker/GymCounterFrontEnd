@@ -8,17 +8,19 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class GymAddressesService {
 
-  private _listOfGyms: Gym[] = new Array();
-  private results: any;
   private activeGymObject = new BehaviorSubject<Gym>(new Gym(-1, '', '', '', '', [null]));
-  private listOfGymsArray = new BehaviorSubject<Gym[]>(new Array());
-
   activeGym = this.activeGymObject.asObservable();
-  listOfGyms = this.listOfGymsArray.asObservable();
 
+  private errorMessageObject = new BehaviorSubject<String>("");
+  errorMessage = this.errorMessageObject.asObservable();
 
   constructor(private http: HttpClient) {
   }
+
+  setErrorMessage(message: String) {
+    this.errorMessageObject.next(message);
+  }
+
 
 
   setActiveGym(message: Gym) {
@@ -36,12 +38,19 @@ export class GymAddressesService {
 
   checkAccessCode(accessCode: string) {
     this.http.post('https://gym-backend.herokuapp.com/getGymAndCamerasFromAccessCode', {"accessCode": accessCode}, {observe: 'response'})
-      .subscribe(resp => {
+      .subscribe(
+        resp => {
+        this.setErrorMessage("");
         let CamerasArray = [];
         let newGym = new Gym(resp['body']['gym']['id'], resp.body['gym']['name'], resp.body['gym']['address'], resp.body['gym']['city'], resp.body['gym']['country'], resp.body['cameras']);
         this.setActiveGym(newGym);
 
-      });
+      },
+      error => {
+        this.setErrorMessage('invalid access code');
+      }
+
+      );
   }
 
 

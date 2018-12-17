@@ -10,13 +10,11 @@ import { Gym } from '../../../assets/Gym';
 export class LoginComponent implements OnInit {
 
   searchString: string;
-  listOfGyms: Gym[];
 
   constructor(private gymAddressesService: GymAddressesService) {
   }
 
   ngOnInit() {
-    this.gymAddressesService.listOfGyms.subscribe(listOfGyms => this.listOfGyms = listOfGyms);
 
   }
 

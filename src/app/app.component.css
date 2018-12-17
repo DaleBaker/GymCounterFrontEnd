@@ -11,6 +11,13 @@
   width: 100%;
 }
 
+#error_field {
+  text-align: center;
+  vertical-align: text-top;
+      vertical-align: super;
+margin-top: 0px;
+color: red;}
+
 .about_container {
   text-align: center;
   margin: auto;
@@ -19,4 +26,14 @@
 .about_container_container {
   position: absolute;
   bottom: 10%; width:25%;
+}
+
+
+.noPadding {
+  padding-left: 24px;
+    padding-right: 24px;
+  padding-bottom: 12px;
+    padding-top: 12px;
+
+
 }

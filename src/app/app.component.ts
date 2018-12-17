@@ -11,10 +11,11 @@ import {Gym} from '../assets/Gym';
 export class AppComponent {
   activeGym: Gym;
   showContactPage = false;
+  errorMessage: String;
 
   constructor(private gymAddressesService: GymAddressesService) {
     this.gymAddressesService.activeGym.subscribe(activeGym => this.activeGym = activeGym);
-
+    this.gymAddressesService.errorMessage.subscribe(errorMessage => this.errorMessage = errorMessage);
 
   }
 
