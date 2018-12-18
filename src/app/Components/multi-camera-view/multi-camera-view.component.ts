@@ -120,8 +120,6 @@ export class MultiCameraViewComponent implements OnInit {
         newDateObj2.setTime(lastDate.getTime() + (720 * 60 * 1000));
         var isoString = newDateObj2.toISOString().split("T");
 
-       console.log(isoString);
-
        if (parseInt(isoString[1].substring(0, 2)) < 6 || parseInt(isoString[1].substring(0, 2)) > 22) {
         currentGymPopulation = 0;
       }
