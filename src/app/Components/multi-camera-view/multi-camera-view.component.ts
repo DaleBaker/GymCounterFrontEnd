@@ -55,8 +55,7 @@ export class MultiCameraViewComponent implements OnInit {
       for (let i = 0; i < cameraData.length; i++) {
         cameraProcessedData.push([new Date(cameraData[i].time), cameraData[i].population]);
         componentReference.currentCameraPopulations[cameraId] = cameraData[i].population;
-                lastDate = new Date(cameraData[i].time);
-
+        lastDate = new Date(cameraData[i].time);
       }
 
       data.addRows(cameraProcessedData);
@@ -68,7 +67,9 @@ export class MultiCameraViewComponent implements OnInit {
         vAxis: {
           title: 'Number Of People',
 
-        }, chartArea: {width: '70%'}
+        }, chartArea: {width: '70%'},
+          'legend':'bottom'
+
 
       };
 
@@ -81,8 +82,8 @@ export class MultiCameraViewComponent implements OnInit {
       const data = new google.visualization.DataTable();
 
       data.addColumn('datetime', 'Time');
-      data.addColumn('number', 'Number Of People');
-      data.addColumn('number', 'Predicted Number Of People');
+      data.addColumn('number', 'Observed Number');
+      data.addColumn('number', 'Predicted Number');
 
       let cameraData = value;
       let cameraProcessedData = [];
@@ -139,7 +140,8 @@ export class MultiCameraViewComponent implements OnInit {
         vAxis: {
           title: 'Number Of People',
 
-          }, chartArea: {width: '70%'}
+          }, chartArea: {width: '70%'},
+                    'legend':'bottom'
       };
 
       const chart = new google.visualization.LineChart(document.getElementById("chartContainer" + cameraId));

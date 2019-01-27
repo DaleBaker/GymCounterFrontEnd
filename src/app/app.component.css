@@ -1,5 +1,5 @@
 #card {
-  background-image: url("../assets/gym_image_purple.png");
+  background-image: url("../assets/darkerAquaGym.png"); //cssduotone for editing 
   background-repeat:no-repeat;
   background-size:cover;
 
@@ -11,12 +11,31 @@
   width: 100%;
 }
 
+#colour {
+  background: rgba(111, 185, 214, .67);  //111. 185, 214
+  background-repeat:no-repeat;
+  background-size:cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+#gym-display {
+  padding-left: 24px;
+
+}
+
 #error_field {
   text-align: center;
   vertical-align: text-top;
-      vertical-align: super;
-margin-top: 0px;
-color: red;}
+  vertical-align: super;
+  margin-top: 0px;
+  color: red;
+}
 
 .about_container {
   text-align: center;
@@ -31,9 +50,9 @@ color: red;}
 
 .noPadding {
   padding-left: 24px;
-    padding-right: 24px;
+  padding-right: 24px;
   padding-bottom: 12px;
-    padding-top: 12px;
+  padding-top: 12px;
 
 
 }
