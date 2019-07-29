@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Gym } from '../../assets/Gym';
 import {Camera } from '../../assets/Camera';
 
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class GymAddressesService {
