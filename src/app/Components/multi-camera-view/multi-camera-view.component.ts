@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //import * as CanvasJS from './../../../assets/canvasjs.min';
 import { Gym } from '../../../assets/Gym';
-import { GymAddressesService } from '../../services/gym-addresses.service';
+import { GymAddressesService } from '../../Services/gym-addresses.service';
 declare var google: any;
 
 @Component({

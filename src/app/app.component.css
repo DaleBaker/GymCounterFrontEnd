@@ -1,5 +1,5 @@
 #card {
-  background-image: url("../assets/darkerAquaGym.png"); //cssduotone for editing 
+  background-image: url("../assets/darkerAquaGym.png");
   background-repeat:no-repeat;
   background-size:cover;
 
@@ -12,7 +12,7 @@
 }
 
 #colour {
-  background: rgba(111, 185, 214, .67);  //111. 185, 214
+  background: rgba(111, 185, 214, .67); 
   background-repeat:no-repeat;
   background-size:cover;
 

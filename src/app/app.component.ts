@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GymAddressesService } from './services/gym-addresses.service';
+import { GymAddressesService } from './Services/gym-addresses.service';
 import {Gym} from '../assets/Gym';
 
 @Component({
