@@ -12,6 +12,17 @@ import { GymDisplayComponent } from './Components/gym-display/gym-display.compon
 import { ContactComponent } from './Components/contact/contact.component';
 import { SingleCameraViewComponent } from './Components/single-camera-view/single-camera-view.component';
 import { MultiCameraViewComponent } from './Components/multi-camera-view/multi-camera-view.component';
+import { RouterModule, Routes } from '@angular/router';
+
+
+const appRoutes: Routes = [
+  { path: 'gym', component: GymDisplayComponent },
+  { path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  { path: 'login',      component: LoginComponent }
+];
 
 
 @NgModule({
@@ -24,6 +35,10 @@ import { MultiCameraViewComponent } from './Components/multi-camera-view/multi-c
     MultiCameraViewComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     BrowserModule,
     MatImports,
     HttpClientModule,
