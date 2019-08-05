@@ -11,7 +11,7 @@ export class GymAddressesService {
   private activeGymObject = new BehaviorSubject<Gym>(new Gym(-1, '', '', '', '', [null]));
   activeGym = this.activeGymObject.asObservable();
 
-  private errorMessageObject = new BehaviorSubject<String>("");
+  private errorMessageObject = new BehaviorSubject<String>('');
   errorMessage = this.errorMessageObject.asObservable();
 
   constructor(private http: HttpClient) {
@@ -37,25 +37,21 @@ export class GymAddressesService {
   }
 
   checkAccessCode(accessCode: string) {
-    this.http.post('https://gym-backend.herokuapp.com/getGymAndCamerasFromAccessCode', {"accessCode": accessCode}, {observe: 'response'})
+    this.http.post('https://gym-backend.herokuapp.com/getGymAndCamerasFromAccessCode', {'accessCode': accessCode}, {observe: 'response'})
       .subscribe(
         resp => {
-        this.setErrorMessage("");
-        let CamerasArray = [];
-        let newGym = new Gym(resp['body']['gym']['id'], resp.body['gym']['name'], resp.body['gym']['address'], resp.body['gym']['city'], resp.body['gym']['country'], resp.body['cameras']);
+        this.setErrorMessage('');
+        const newGym = new Gym(resp['body']['gym']['id'], resp.body['gym']['name'], resp.body['gym']['address'], resp.body['gym']['city'], resp.body['gym']['country'], resp.body['cameras']);
         this.setActiveGym(newGym);
-
       },
       error => {
         this.setErrorMessage('invalid access code');
-      }
-
-      );
+      });
   }
 
 
   getPopulationForCamera(cameraID: Number) {
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       this.http.get('https://gym-backend.herokuapp.com/getLastWeekFromCamera/' + cameraID)
       .subscribe(resp => {
         resolve(resp);
@@ -66,7 +62,7 @@ export class GymAddressesService {
 
   getDayForCamera(cameraID: Number) {
 
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       this.http.get('https://gym-backend.herokuapp.com/getTodayFromCamera/' + cameraID)
       .subscribe(resp => {
         resolve(resp);
