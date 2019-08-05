@@ -1,6 +1,8 @@
 <div ngFor *ngFor="let item of activeGym.getCameras(); let i = index" >
 
-	<h2>There are currently {{currentCameraPopulations[i]}} people in {{cameraNames[i]}} </h2>
+  <div id="camera_header_div">
+	  <h2>There are currently {{currentCameraPopulations[i]}} people in {{cameraNames[i]}} </h2>
+  </div>
   <div [attr.id]="'chartContainer' + i"></div>
 
 </div>
