@@ -13,6 +13,7 @@ import { ContactComponent } from './Components/contact/contact.component';
 import { SingleCameraViewComponent } from './Components/single-camera-view/single-camera-view.component';
 import { MultiCameraViewComponent } from './Components/multi-camera-view/multi-camera-view.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './app/Components/not-found/not-found.component';
 
 
 const appRoutes: Routes = [
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     GymDisplayComponent,
     ContactComponent,
     SingleCameraViewComponent,
-    MultiCameraViewComponent
+    MultiCameraViewComponent,
+    NotFoundComponent
   ],
   imports: [
     RouterModule.forRoot(
